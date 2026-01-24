@@ -1,0 +1,6 @@
+{
+    "program": "jetrpay_payroll_testnet_v1.aleo",
+    "version": "1.0.0",
+    "description": "JetrPay Private Salary Streaming Protocol",
+    "license": "MIT"
+}
