@@ -80,7 +80,7 @@ export default function AdminDashboard() {
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none relative overflow-hidden group">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Monthly Payroll Burn
+              Privacy Pool Balance
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -88,19 +88,19 @@ export default function AdminDashboard() {
               <span className="text-2xl font-black text-white">${companyStats.monthlyBurn.toLocaleString()}</span>
             </div>
             <div className="mt-2 flex items-center gap-1 text-[9px] font-bold uppercase">
-              <TrendingDown className="w-3 h-3 text-green-400" />
-              <span className="text-green-400">-2.4% vs last month</span>
+              <Shield className="w-3 h-3 text-cyan-400" />
+              <span className="text-cyan-400">Encrypted • ZK-Verified</span>
             </div>
           </CardContent>
           <div className="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-10 transition-opacity">
-            <TrendingDown className="w-12 h-12 text-white" />
+            <Shield className="w-12 h-12 text-cyan-400" />
           </div>
         </Card>
 
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Active Streams
+              Anonymous Claims
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
               <span className="text-[10px] font-bold text-neutral-500 uppercase">Employees</span>
             </div>
             <div className="mt-2 text-[9px] font-bold text-cyan-400 uppercase tracking-widest">
-              Protocol Streaming Stable
+              Identities Hidden • ZK Verified
             </div>
           </CardContent>
         </Card>
@@ -117,28 +117,28 @@ export default function AdminDashboard() {
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Vault Balance
+              Allocated (Private)
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black text-orange-500">${companyStats.vaultBalance.toLocaleString()}</span>
+              <span className="text-2xl font-black text-purple-500">${companyStats.vaultBalance.toLocaleString()}</span>
             </div>
-            <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Supports 5.7 months burn</div>
+            <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Balance Hidden from Public</div>
           </CardContent>
         </Card>
 
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Compliance Health
+              ZK Compliance
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-black text-green-400">100%</span>
             </div>
-            <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Tax Withholding Auto-Sync</div>
+            <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Proofs Ready for Auditors</div>
           </CardContent>
         </Card>
       </div>

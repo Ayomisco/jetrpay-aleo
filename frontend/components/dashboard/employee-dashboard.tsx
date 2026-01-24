@@ -53,13 +53,13 @@ export default function EmployeeDashboard() {
     <div className="space-y-6">
       {/* Hero Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card className="bg-orange-500/5 border-orange-500/30 rounded-none relative overflow-hidden group">
+        <Card className="bg-cyan-400/5 border-cyan-400/30 rounded-none relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Zap className="w-16 h-16 text-orange-500" />
+            <Zap className="w-16 h-16 text-cyan-400" />
           </div>
           <CardHeader className="pb-2">
-            <CardTitle className="text-[10px] font-black uppercase tracking-widest text-orange-500">
-              Live Accrued Balance
+            <CardTitle className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
+              Private Balance (ZK-Verified)
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -67,25 +67,25 @@ export default function EmployeeDashboard() {
               <span className="text-3xl sm:text-4xl font-black tracking-tighter text-white font-mono break-all">
                 ${accruedBalance.toFixed(6)}
               </span>
-              <span className="text-xs font-bold text-orange-500/70 uppercase">USDC</span>
+              <span className="text-xs font-bold text-cyan-400/70 uppercase">USDC</span>
             </div>
             <p className="text-[10px] text-neutral-500 mt-2 font-bold uppercase tracking-tight">
-              Streaming from: MetaGlobal Tech
+              Identity Hidden • Amount Encrypted
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-2">
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button className="flex-1 bg-orange-500 hover:bg-orange-600 text-black font-black uppercase text-[10px] tracking-widest rounded-none h-11">
-                    <ArrowDownCircle className="w-3 h-3 mr-2" /> Withdraw Now
+                  <Button className="flex-1 bg-cyan-400 hover:bg-cyan-500 text-black font-black uppercase text-[10px] tracking-widest rounded-none h-11">
+                    <ArrowDownCircle className="w-3 h-3 mr-2" /> Anonymous Withdrawal
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="bg-[#0c0c0c] border-neutral-800 text-white font-mono rounded-none sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle className="text-orange-500 uppercase tracking-widest italic font-black">
-                      INITIALIZE WITHDRAWAL
+                    <DialogTitle className="text-cyan-400 uppercase tracking-widest italic font-black">
+                      PRIVATE WITHDRAWAL (ZK-PROOF)
                     </DialogTitle>
                     <DialogDescription className="text-neutral-500 text-[10px] uppercase font-bold tracking-widest">
-                      Available Protocol Liquidity: ${accruedBalance.toFixed(2)} USDC
+                      Withdraw to unlinkable wallet • Identity protected
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-6 py-4">
@@ -185,14 +185,14 @@ export default function EmployeeDashboard() {
         {/* Stream Activity */}
         <div className="lg:col-span-2 space-y-6">
           <Card className="bg-black border-neutral-800 rounded-none overflow-hidden">
-            <div className="h-1 bg-orange-500 w-full" />
+            <div className="h-1 bg-cyan-400 w-full" />
             <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-neutral-900 gap-4">
               <div>
                 <CardTitle className="text-xs font-black uppercase tracking-[0.2em] text-white">
-                  Streaming Activity
+                  Private Transactions
                 </CardTitle>
                 <CardDescription className="text-[9px] font-bold uppercase text-neutral-500">
-                  Real-time ledger entries from Arbitrum
+                  ZK-Verified on Aleo Network • Identity Hidden
                 </CardDescription>
               </div>
               <Button
