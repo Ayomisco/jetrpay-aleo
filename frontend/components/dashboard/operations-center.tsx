@@ -11,7 +11,7 @@ export default function OperationsCenter() {
   const handleManualScan = () => {
     addNotification({
       title: "Protocol Scan",
-      message: "Manually indexing recent Arbitrum blocks...",
+      message: "Manually indexing recent Aleo blocks...",
       type: "info",
     })
 
@@ -31,13 +31,13 @@ export default function OperationsCenter() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Activity className="w-6 h-6 text-orange-500" />
+          <Activity className="w-6 h-6 text-cyan-500" />
           <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">Real-Time Operations</h2>
         </div>
         <Button
           onClick={handleManualScan}
           variant="outline"
-          className="border-neutral-800 text-[10px] font-black uppercase tracking-widest text-white rounded-none hover:bg-orange-500 hover:text-black hover:border-orange-500 transition-all bg-transparent h-9"
+          className="border-neutral-800 text-[10px] font-black uppercase tracking-widest text-white rounded-none hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all bg-transparent h-9"
         >
           <RefreshCw className="w-3.5 h-3.5 mr-2" /> Index Network
         </Button>
@@ -46,9 +46,9 @@ export default function OperationsCenter() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: "Protocol Load", value: "24%", icon: Cpu, color: "text-cyan-400" },
-          { label: "Active Streams", value: "842", icon: Zap, color: "text-orange-500" },
-          { label: "Security level", value: "High", icon: ShieldAlert, color: "text-green-400" },
-          { label: "Tx Frequency", value: "1.2s", icon: Activity, color: "text-white" },
+          { label: "Active Private Streams", value: "842", icon: Zap, color: "text-purple-500" },
+          { label: "Privacy level", value: "Max", icon: ShieldAlert, color: "text-green-400" },
+          { label: "Proof Rate", value: "0.2s", icon: Activity, color: "text-white" },
         ].map((stat, i) => (
           <Card key={i} className="bg-[#0f0f0f] border-neutral-800 rounded-none overflow-hidden relative">
             <div className={`absolute top-0 right-0 p-3 opacity-10`}>
@@ -74,21 +74,21 @@ export default function OperationsCenter() {
         </CardHeader>
         <CardContent>
           <div className="h-64 bg-neutral-900/30 border border-neutral-800 p-4 font-mono text-[10px] text-neutral-400 overflow-auto space-y-1 scrollbar-thin scrollbar-thumb-neutral-800">
-            <p className="text-cyan-400 font-bold">[SYSTEM] ARBITRUM ONE RPC CONNECTED (ID: 42161)</p>
-            <p className="text-neutral-600 italic">Historical data initialized...</p>
+            <p className="text-cyan-400 font-bold">[SYSTEM] ALEO TESTNET3 RPC CONNECTED (ID: 31337)</p>
+            <p className="text-neutral-600 italic">Historical proofs initialized...</p>
 
             {transactions.map((tx, idx) => (
               <p key={tx.id}>
                 <span className="text-neutral-600">[{new Date(tx.timestamp).toLocaleTimeString()}]</span>{" "}
-                <span className={tx.type === "withdrawal" ? "text-red-400" : "text-green-400"}>
+                <span className={tx.type === "withdrawal" ? "text-purple-400" : "text-green-400"}>
                   {tx.type === "withdrawal" ? "OUTFLOW" : "INFLOW"}:
                 </span>{" "}
-                Entry #{tx.blockNumber} confirmed.{" "}
+                Entry #{tx.blockNumber} verified.{" "}
                 <span className="font-bold">
                   {tx.type === "withdrawal" ? "-" : "+"}
                   {tx.amount.toFixed(6)} {tx.asset}
                 </span>{" "}
-                {tx.to && <span className="text-neutral-500 font-bold">» {tx.to}</span>}
+                {tx.to && <span className="text-neutral-500 font-bold">» {tx.to.replace('0x', 'aleo1')}</span>}
               </p>
             ))}
 

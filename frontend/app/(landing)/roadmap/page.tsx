@@ -26,13 +26,13 @@ export default function RoadmapPage() {
         <div className="space-y-12">
           {/* Q1 2025 */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-black italic tracking-tighter text-orange-500">Q1 2025 — Foundation</h2>
+            <h2 className="text-2xl font-black italic tracking-tighter text-cyan-500">Q1 2025 — Privacy Foundation</h2>
             <div className="space-y-3">
               {[
-                { item: "Per-second salary streaming on Arbitrum", completed: true },
-                { item: "Employee dashboard & real-time accrual", completed: true },
-                { item: "Earned Wage Access (EWA) feature", completed: true },
-                { item: "Multi-sig vault security", completed: true },
+                { item: "Migration from Arbitrum to Aleo", completed: true },
+                { item: "ZK Schema design for private payroll", completed: true },
+                { item: "Anonymous claiming implementation", completed: true },
+                { item: "Multi-sig private vault security", completed: true },
               ].map((feature, i) => (
                 <div key={i} className="flex gap-4 items-start p-4 bg-[#0f0f0f] border border-neutral-800 rounded-none">
                   {feature.completed ? (
@@ -50,13 +50,13 @@ export default function RoadmapPage() {
 
           {/* Q2 2025 */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-black italic tracking-tighter text-cyan-400">Q2 2025 — Expansion</h2>
+            <h2 className="text-2xl font-black italic tracking-tighter text-purple-400">Q2 2025 — Expansion</h2>
             <div className="space-y-3">
               {[
-                { item: "Bill pay automation & scheduling", completed: false },
-                { item: "Savings goals with auto-transfer", completed: false },
-                { item: "CSV bulk import for 1000+ employees", completed: false },
-                { item: "Advanced analytics dashboard", completed: false },
+                { item: "Private Bill pay automation & scheduling", completed: false },
+                { item: "Encrypted savings goals with auto-transfer", completed: false },
+                { item: "Bulk ZK proof generation for 1000+ employees", completed: false },
+                { item: "Proof-of-Solvency analytics dashboard", completed: false },
               ].map((feature, i) => (
                 <div key={i} className="flex gap-4 items-start p-4 bg-[#0f0f0f] border border-neutral-800 rounded-none">
                   <Circle className="w-5 h-5 text-neutral-600 flex-shrink-0 mt-0.5" />

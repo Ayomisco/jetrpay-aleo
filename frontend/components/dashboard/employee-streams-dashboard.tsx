@@ -12,15 +12,15 @@ export default function EmployeeStreamsDashboard() {
         <Card className="bg-black border-white/10">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Live Accrued Balance
+              Private Accrued Balance
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-black text-orange-500">${accruedBalance.toFixed(2)}</span>
+              <span className="text-3xl font-black text-cyan-500">${accruedBalance.toFixed(2)}</span>
             </div>
             <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase flex items-center gap-2">
-              <Zap className="w-3 h-3 text-orange-500" /> STREAMING_ACTIVE
+              <Zap className="w-3 h-3 text-cyan-500" /> ZK-STREAM_ACTIVE
             </div>
           </CardContent>
         </Card>
@@ -28,12 +28,12 @@ export default function EmployeeStreamsDashboard() {
         <Card className="bg-black border-white/10">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Per-Second Rate
+              Privacy-Preserved Rate
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-black text-cyan-400">${streamingRate.toFixed(6)}</span>
+              <span className="text-3xl font-black text-purple-400">${streamingRate.toFixed(6)}</span>
             </div>
             <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">/SECOND</div>
           </CardContent>
@@ -42,7 +42,7 @@ export default function EmployeeStreamsDashboard() {
         <Card className="bg-black border-white/10">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Today's Earnings
+              Today's Hidden Earnings
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -50,7 +50,7 @@ export default function EmployeeStreamsDashboard() {
               <span className="text-3xl font-black text-white">${(streamingRate * 86400).toFixed(2)}</span>
             </div>
             <div className="mt-2 text-[9px] font-bold text-green-400 uppercase flex items-center gap-2">
-              <TrendingUp className="w-3 h-3" /> ON_TRACK
+              <TrendingUp className="w-3 h-3" /> VERIFIED
             </div>
           </CardContent>
         </Card>
@@ -59,7 +59,7 @@ export default function EmployeeStreamsDashboard() {
       <Card className="bg-black border-white/10">
         <CardHeader>
           <CardTitle className="text-sm font-black uppercase tracking-[0.2em] text-white italic">
-            Recent Stream Activity
+            Encrypted Stream Activity
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -69,9 +69,9 @@ export default function EmployeeStreamsDashboard() {
                 <div className="flex items-center gap-4">
                   <div className="w-8 h-8 bg-white/5 flex items-center justify-center">
                     {tx.type === "stream" ? (
-                      <Zap className="w-4 h-4 text-orange-500" />
+                      <Zap className="w-4 h-4 text-cyan-500" />
                     ) : (
-                      <DollarSign className="w-4 h-4 text-cyan-400" />
+                      <DollarSign className="w-4 h-4 text-purple-400" />
                     )}
                   </div>
                   <div>

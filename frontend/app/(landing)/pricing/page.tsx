@@ -30,37 +30,37 @@ export default function PricingPage() {
               desc: "For small teams & freelancers",
               price: "Free",
               period: "Forever",
-              features: ["Up to 5 employees", "EWA access", "Basic analytics", "Email support"],
-              cta: "Get Started",
+              features: ["Up to 5 employees", "Private claiming", "Basic proof analytics", "Email support"],
+              cta: "Start Encrypted",
               highlight: false,
             },
             {
-              name: "Professional",
-              desc: "For growing companies",
+              name: "Protocol",
+              desc: "For growing DAOs & Companies",
               price: "$99",
               period: "/month",
               features: [
                 "Up to 100 employees",
-                "All Starter features",
-                "Bill pay automation",
-                "Savings goals",
-                "Advanced analytics",
-                "Priority support",
+                "All Explorer features",
+                "Zero-knowledge scheduling",
+                "Privacy pools",
+                "Advanced proof generation",
+                "Priority ZK support",
               ],
               cta: "Start Free Trial",
               highlight: true,
             },
             {
-              name: "Enterprise",
+              name: "Network",
               desc: "For large organizations",
               price: "Custom",
               period: "pricing",
               features: [
                 "Unlimited employees",
-                "All Professional features",
-                "Custom integrations",
-                "Dedicated account manager",
-                "Custom branding",
+                "All Protocol features",
+                "Custom ZK circuits",
+                "Dedicated auditor",
+                "White-label privacy",
                 "SLA guarantee",
               ],
               cta: "Contact Sales",
@@ -71,12 +71,12 @@ export default function PricingPage() {
               key={i}
               className={`rounded-none border p-8 space-y-6 ${
                 plan.highlight
-                  ? "bg-gradient-to-br from-orange-500/10 to-transparent border-orange-500/50 relative"
+                  ? "bg-gradient-to-br from-cyan-500/10 to-transparent border-cyan-500/50 relative"
                   : "bg-[#0f0f0f] border-neutral-800"
               }`}
             >
               {plan.highlight && (
-                <div className="absolute top-0 right-0 bg-orange-500 text-black px-4 py-1 text-[9px] font-black uppercase tracking-widest">
+                <div className="absolute top-0 right-0 bg-cyan-500 text-black px-4 py-1 text-[9px] font-black uppercase tracking-widest">
                   Popular
                 </div>
               )}
@@ -93,7 +93,7 @@ export default function PricingPage() {
               <ul className="space-y-3">
                 {plan.features.map((feature, j) => (
                   <li key={j} className="flex gap-3 text-sm">
-                    <Check className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                    <Check className="w-4 h-4 text-cyan-500 flex-shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
                 ))}

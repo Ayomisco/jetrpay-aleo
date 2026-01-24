@@ -21,7 +21,7 @@ export default function SystemSettings() {
         {/* Security Controls */}
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none">
           <CardHeader className="flex flex-row items-center gap-3 border-b border-neutral-900">
-            <Shield className="w-5 h-5 text-orange-500" />
+            <Shield className="w-5 h-5 text-cyan-500" />
             <CardTitle className="text-xs font-black uppercase tracking-widest text-white">Security & Auth</CardTitle>
           </CardHeader>
           <CardContent className="p-6 space-y-4">
@@ -30,11 +30,11 @@ export default function SystemSettings() {
               className="w-full flex items-center justify-between p-3 bg-black border border-neutral-800 hover:bg-white/5 transition-colors group"
             >
               <div className="flex items-center gap-3">
-                <Lock className={`w-4 h-4 ${multiFactorEnabled ? "text-orange-500" : "text-neutral-500"}`} />
-                <span className="text-[10px] font-bold uppercase tracking-widest">Multi-Factor SIWE</span>
+                <Lock className={`w-4 h-4 ${multiFactorEnabled ? "text-cyan-500" : "text-neutral-500"}`} />
+                <span className="text-[10px] font-bold uppercase tracking-widest">ZK-Auth SIWE</span>
               </div>
               <div
-                className={`w-10 h-5 flex items-center p-0.5 transition-colors ${multiFactorEnabled ? "bg-orange-500 justify-end" : "bg-neutral-800 justify-start"}`}
+                className={`w-10 h-5 flex items-center p-0.5 transition-colors ${multiFactorEnabled ? "bg-cyan-500 justify-end" : "bg-neutral-800 justify-start"}`}
               >
                 <div className="w-4 h-4 bg-black" />
               </div>
@@ -46,14 +46,14 @@ export default function SystemSettings() {
             >
               <div className="flex items-center gap-3">
                 {privateModeEnabled ? (
-                  <EyeOff className="w-4 h-4 text-cyan-400" />
+                  <EyeOff className="w-4 h-4 text-purple-400" />
                 ) : (
                   <Eye className="w-4 h-4 text-neutral-500" />
                 )}
-                <span className="text-[10px] font-bold uppercase tracking-widest">Stealth Privacy Mode</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">Max Privacy Mode</span>
               </div>
               <div
-                className={`w-10 h-5 flex items-center p-0.5 transition-colors ${privateModeEnabled ? "bg-cyan-500 justify-end" : "bg-neutral-800 justify-start"}`}
+                className={`w-10 h-5 flex items-center p-0.5 transition-colors ${privateModeEnabled ? "bg-purple-500 justify-end" : "bg-neutral-800 justify-start"}`}
               >
                 <div className="w-4 h-4 bg-black" />
               </div>
@@ -69,8 +69,8 @@ export default function SystemSettings() {
               <Button
                 onClick={() =>
                   addNotification({
-                    title: "Rotating Keys",
-                    message: "Generating new session keys...",
+                    title: "Rotating View Keys",
+                    message: "Generating new session view keys...",
                     type: "warning",
                   })
                 }
@@ -111,7 +111,7 @@ export default function SystemSettings() {
               <div className="space-y-2">
                 <p className="text-[9px] font-black uppercase text-neutral-600 tracking-widest">Authorized Signers</p>
                 <div className="space-y-1">
-                  {["0x71...C4 (OWNER)", "0x3A...F1 (ADMIN)", "0x9E...B2 (TREASURER)"].map((addr, i) => (
+                  {["aleo1...9xj (OWNER)", "aleo1...k2p (ADMIN)", "aleo1...7mn (TREASURER)"].map((addr, i) => (
                     <div key={i} className="flex items-center justify-between p-2 bg-black border border-neutral-900">
                       <span className="text-[9px] font-bold text-white font-mono uppercase">{addr}</span>
                       <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />

@@ -116,7 +116,7 @@ export default function AdminPayrollConsole() {
         <Card className="bg-black border-white/10 relative overflow-hidden group">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Monthly Payroll Burn
+              Monthly Private Payroll
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -133,7 +133,7 @@ export default function AdminPayrollConsole() {
         <Card className="bg-black border-white/10">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Active Streams
+              Active Private Streams
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -144,7 +144,7 @@ export default function AdminPayrollConsole() {
               <span className="text-[10px] font-bold text-neutral-500 uppercase">/ {employees.length} Total</span>
             </div>
             <div className="mt-2 text-[9px] font-bold text-cyan-400 uppercase tracking-widest">
-              Protocol Streaming Stable
+              ZK Proof Generation Active
             </div>
           </CardContent>
         </Card>
@@ -152,12 +152,12 @@ export default function AdminPayrollConsole() {
         <Card className="bg-black border-white/10">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Vault Balance
+              Vault Private Balance
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black text-orange-500">${companyStats.vaultBalance.toLocaleString()}</span>
+              <span className="text-2xl font-black text-purple-400">${companyStats.vaultBalance.toLocaleString()}</span>
             </div>
             <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Supports 5.7 months burn</div>
           </CardContent>
@@ -166,14 +166,14 @@ export default function AdminPayrollConsole() {
         <Card className="bg-black border-white/10">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-neutral-500">
-              Compliance Health
+              Compliance Privacy
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-black text-green-400">100%</span>
             </div>
-            <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Tax Withholding Auto-Sync</div>
+            <div className="mt-2 text-[9px] font-bold text-neutral-500 uppercase">Zero-Knowledge Audits</div>
           </CardContent>
         </Card>
       </div>
@@ -231,7 +231,7 @@ export default function AdminPayrollConsole() {
         <Button
           onClick={() => {
             const csvContent =
-              "Name,Role,Salary,Wallet\nAgent Smith,Engineer,120000,0x71C7...F2C4\nAgent Jones,Designer,95000,0x3A9D...B1E8"
+              "Name,Role,Salary,Wallet\nAgent Smith,Engineer,120000,aleo1...92xj\nAgent Jones,Designer,95000,aleo1...7k3m"
             const blob = new Blob([csvContent], { type: "text/csv" })
             const url = URL.createObjectURL(blob)
             const a = document.createElement("a")
@@ -240,7 +240,7 @@ export default function AdminPayrollConsole() {
             a.click()
             addNotification({
               title: "Template Downloaded",
-              message: "CSV template ready for employee import",
+              message: "CSV template ready for private employee import",
               type: "success",
             })
           }}
@@ -250,7 +250,7 @@ export default function AdminPayrollConsole() {
           <Download className="w-6 h-6 text-cyan-400" />
           <div>
             <p className="text-[10px] font-black uppercase tracking-widest">Download Template</p>
-            <p className="text-[8px] text-neutral-500 uppercase mt-1">CSV Format Guide</p>
+            <p className="text-[8px] text-neutral-500 uppercase mt-1">Aleo Compatible CSV Format</p>
           </div>
         </Button>
 
@@ -388,12 +388,12 @@ export default function AdminPayrollConsole() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">
-                      Arbitrum Wallet Address
+                      Aleo Wallet Address
                     </label>
                     <Input
                       value={newEmployee.wallet}
                       onChange={(e) => setNewEmployee({ ...newEmployee, wallet: e.target.value })}
-                      placeholder="0x..."
+                      placeholder="aleo1..."
                       className="bg-black border-white/10 text-white h-12 font-mono"
                     />
                   </div>
@@ -401,9 +401,9 @@ export default function AdminPayrollConsole() {
                 <DialogFooter>
                   <Button
                     onClick={handleAddEmployee}
-                    className="w-full bg-orange-500 text-black hover:bg-orange-600 font-black uppercase text-xs tracking-widest h-14"
+                    className="w-full bg-cyan-500 text-black hover:bg-cyan-600 font-black uppercase text-xs tracking-widest h-14"
                   >
-                    AUTHORIZE PROTOCOL DEPLOYMENT
+                    AUTHORIZE ZK STREAM DEPLOYMENT
                   </Button>
                 </DialogFooter>
               </DialogContent>

@@ -68,53 +68,53 @@ export default function EmployeeFinancialHub() {
         <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">Financial Hub</h2>
         <div className="flex gap-2">
           <div className="text-right">
-            <p className="text-[10px] font-bold text-neutral-500 uppercase">Available Balance</p>
-            <p className="text-lg font-black text-orange-500">${accruedBalance.toFixed(2)}</p>
+            <p className="text-[10px] font-bold text-neutral-500 uppercase">Available Private Balance</p>
+            <p className="text-lg font-black text-purple-400">${accruedBalance.toFixed(2)}</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Earned Wage Access */}
-        <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none overflow-hidden group hover:border-orange-500/30 transition-all">
-          <div className="h-1 bg-gradient-to-r from-orange-500 to-orange-600 w-full" />
+        <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none overflow-hidden group hover:border-cyan-500/30 transition-all">
+          <div className="h-1 bg-gradient-to-r from-cyan-500 to-purple-600 w-full" />
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-orange-500/10 border border-orange-500/30 rounded-none">
-                <Zap className="w-5 h-5 text-orange-500" />
+              <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-none">
+                <Zap className="w-5 h-5 text-cyan-500" />
               </div>
               <CardTitle className="text-xs font-black uppercase tracking-widest text-white">
-                Earned Wage Access
+                Private Wage Access
               </CardTitle>
             </div>
             <CardDescription className="text-[9px] text-neutral-500 font-bold uppercase">
-              Access earned wages instantly
+              Access earned wages privately
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="p-3 bg-black border border-neutral-800 rounded-none space-y-2">
               <p className="text-[10px] font-bold text-neutral-500 uppercase">Max Available Today</p>
-              <p className="text-lg font-black text-orange-500">${accruedBalance.toFixed(2)}</p>
+              <p className="text-lg font-black text-cyan-500">${accruedBalance.toFixed(2)}</p>
             </div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black uppercase text-[10px] tracking-widest rounded-none h-12">
-                  Request EWA
+                <Button className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black uppercase text-[10px] tracking-widest rounded-none h-12">
+                  Request Private EWA
                 </Button>
               </DialogTrigger>
               <DialogContent className="bg-[#0c0c0c] border-neutral-800 text-white font-mono rounded-none sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle className="text-orange-500 uppercase tracking-widest font-black">
-                    Earned Wage Access Request
+                  <DialogTitle className="text-cyan-500 uppercase tracking-widest font-black">
+                    Private Wage Access Request
                   </DialogTitle>
                   <DialogDescription className="text-neutral-500 text-[10px] uppercase font-bold">
-                    Get instant access to your earned wages
+                    Get instant, anonymous access to wages
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">
-                      Amount (USDC)
+                      Amount (Private USGS)
                     </label>
                     <Input
                       type="number"

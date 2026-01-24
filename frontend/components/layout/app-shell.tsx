@@ -44,7 +44,7 @@ export default function AppShell({ children }: AppShellProps) {
   }
 
   return (
-    <div className="flex h-screen bg-black text-white font-mono selection:bg-orange-500 selection:text-black overflow-hidden relative">
+    <div className="flex h-screen bg-black text-white font-mono selection:bg-cyan-500 selection:text-black overflow-hidden relative">
       <div className="absolute inset-0 grid-bg opacity-10 pointer-events-none" />
 
       {/* Mobile Menu Overlay */}
@@ -64,7 +64,7 @@ export default function AppShell({ children }: AppShellProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
                   "flex items-center gap-4 text-2xl font-black tracking-widest uppercase",
-                  pathname === item.href ? "text-orange-500" : "text-neutral-600",
+                  pathname === item.href ? "text-cyan-500" : "text-neutral-600",
                 )}
               >
                 <item.icon className="w-8 h-8" /> {item.label}
@@ -97,7 +97,7 @@ export default function AppShell({ children }: AppShellProps) {
                 href={item.href}
                 className={cn(
                   "flex items-center gap-4 p-3 transition-all relative group",
-                  pathname === item.href ? "text-orange-500" : "text-neutral-500 hover:text-white",
+                  pathname === item.href ? "text-cyan-500" : "text-neutral-500 hover:text-white",
                 )}
               >
                 <item.icon className={cn("w-5 h-5", pathname === item.href && "neon-text-orange")} />

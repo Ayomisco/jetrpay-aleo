@@ -32,51 +32,51 @@ export default function UseCasesPage() {
         <section className="border border-neutral-800 rounded-none overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             <div className="p-12 bg-[#0f0f0f] space-y-6">
-              <div className="p-3 bg-orange-500/10 border border-orange-500/30 rounded-none w-fit">
-                <Building2 className="w-6 h-6 text-orange-500" />
+              <div className="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-none w-fit">
+                <Building2 className="w-6 h-6 text-cyan-500" />
               </div>
               <h2 className="text-3xl font-black italic tracking-tighter">Enterprises & Startups</h2>
               <p className="text-neutral-400">
-                Scale your payroll operations to 10,000+ employees with per-second settlement and zero delays.
+                Scale your payroll operations with military-grade privacy. Zero-knowledge proofs ensure sensitive salary data never leaks.
               </p>
               <ul className="space-y-3 text-sm text-neutral-400">
                 <li className="flex gap-3">
-                  <span className="text-orange-500 font-bold">✓</span>
-                  <span>Bulk CSV import for instant payroll setup</span>
+                  <span className="text-cyan-500 font-bold">✓</span>
+                  <span>Bulk ZK proof generation for instant payroll</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="text-orange-500 font-bold">✓</span>
-                  <span>Real-time burn rate analytics</span>
+                  <span className="text-cyan-500 font-bold">✓</span>
+                  <span>Real-time burn rate privacy</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="text-orange-500 font-bold">✓</span>
+                  <span className="text-cyan-500 font-bold">✓</span>
                   <span>Multi-sig treasury vault controls</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="text-orange-500 font-bold">✓</span>
-                  <span>Global on/off-ramp to 100+ currencies</span>
+                  <span className="text-cyan-500 font-bold">✓</span>
+                  <span>Global off-ramp with zero history</span>
                 </li>
               </ul>
-              <Button className="bg-orange-500 hover:bg-orange-600 text-black font-black uppercase text-xs tracking-widest rounded-none h-12 w-full mt-6">
+              <Button className="bg-cyan-500 hover:bg-cyan-600 text-black font-black uppercase text-xs tracking-widest rounded-none h-12 w-full mt-6">
                 Start Enterprise Trial
               </Button>
             </div>
-            <div className="bg-gradient-to-br from-orange-500/10 to-transparent p-12 flex items-center justify-center border-l border-neutral-800">
+            <div className="bg-gradient-to-br from-cyan-500/10 to-transparent p-12 flex items-center justify-center border-l border-neutral-800">
               <div className="space-y-6">
                 <div className="p-4 bg-black border border-neutral-800 rounded-none">
                   <p className="text-[10px] font-bold text-neutral-500 uppercase mb-2">Typical Results</p>
                   <ul className="space-y-2 text-sm">
                     <li className="flex justify-between">
-                      <span>Payroll Processing Time</span>
-                      <span className="text-orange-500 font-bold">Real-time</span>
+                      <span>Payroll Privacy</span>
+                      <span className="text-cyan-500 font-bold">100% Encrypted</span>
                     </li>
                     <li className="flex justify-between">
-                      <span>Employee Satisfaction</span>
-                      <span className="text-orange-500 font-bold">+85%</span>
+                      <span>Employee Data Leaks</span>
+                      <span className="text-cyan-500 font-bold">Zero</span>
                     </li>
                     <li className="flex justify-between">
-                      <span>Operational Overhead</span>
-                      <span className="text-orange-500 font-bold">-70%</span>
+                      <span>Compliance Overhead</span>
+                      <span className="text-cyan-500 font-bold">-70%</span>
                     </li>
                   </ul>
                 </div>
@@ -88,14 +88,14 @@ export default function UseCasesPage() {
         {/* Freelancers */}
         <section className="border border-neutral-800 rounded-none overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div className="bg-gradient-to-br from-cyan-400/10 to-transparent p-12 flex items-center justify-center border-r border-neutral-800 order-2 md:order-1">
+            <div className="bg-gradient-to-br from-purple-400/10 to-transparent p-12 flex items-center justify-center border-r border-neutral-800 order-2 md:order-1">
               <div className="space-y-6">
                 <div className="p-4 bg-black border border-neutral-800 rounded-none">
                   <p className="text-[10px] font-bold text-neutral-500 uppercase mb-2">Freelancer Benefits</p>
                   <ul className="space-y-2 text-sm">
                     <li className="flex justify-between">
-                      <span>Avg. Access Time</span>
-                      <span className="text-cyan-400 font-bold">Instant</span>
+                      <span>Payment Speed</span>
+                      <span className="text-purple-400 font-bold">Instant</span>
                     </li>
                     <li className="flex justify-between">
                       <span>No Waiting Fees</span>

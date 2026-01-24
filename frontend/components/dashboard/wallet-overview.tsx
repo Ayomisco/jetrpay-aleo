@@ -45,12 +45,12 @@ export default function WalletOverview() {
         <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">Asset Management</h2>
         <Button
           onClick={() =>
-            addNotification({ title: "Syncing Assets", message: "Verifying ledger with Arbitrum One...", type: "info" })
+            addNotification({ title: "Syncing Assets", message: "Verifying ZK state with Aleo Network...", type: "info" })
           }
           variant="outline"
-          className="border-orange-500/50 text-orange-500 hover:bg-orange-500 hover:text-black rounded-none h-9 text-[10px] font-black uppercase tracking-widest bg-transparent"
+          className="border-cyan-500/50 text-cyan-500 hover:bg-cyan-500 hover:text-black rounded-none h-9 text-[10px] font-black uppercase tracking-widest bg-transparent"
         >
-          <RefreshCcw className="w-3.5 h-3.5 mr-2" /> Resync Assets
+          <RefreshCcw className="w-3.5 h-3.5 mr-2" /> Resync ZK State
         </Button>
       </div>
 
@@ -58,15 +58,15 @@ export default function WalletOverview() {
         <Card className="lg:col-span-3 bg-black border-neutral-800 rounded-none">
           <CardHeader className="border-b border-neutral-900">
             <CardTitle className="text-xs font-black uppercase tracking-widest text-white">
-              Portfolio Distribution
+              Private Portfolio Distribution
             </CardTitle>
           </CardHeader>
           <CardContent className="p-8">
             <div className="flex flex-col md:flex-row gap-12 items-center">
               <div className="relative w-48 h-48 border-[12px] border-neutral-900 rounded-full flex items-center justify-center">
-                <div className="absolute inset-0 border-[12px] border-orange-500 border-t-transparent border-l-transparent rounded-full rotate-45" />
+                <div className="absolute inset-0 border-[12px] border-cyan-500 border-t-transparent border-l-transparent rounded-full rotate-45" />
                 <div className="text-center">
-                  <p className="text-[10px] font-black text-neutral-500 uppercase">Total Value</p>
+                  <p className="text-[10px] font-black text-neutral-500 uppercase">Total Encrypted Value</p>
                   <p className="text-2xl font-black text-white">${displayBalance.toLocaleString()}</p>
                 </div>
               </div>
@@ -74,18 +74,18 @@ export default function WalletOverview() {
               <div className="flex-1 w-full space-y-6">
                 {[
                   {
-                    asset: "USDC Stable",
+                    asset: "Private USDC",
                     amount: (displayBalance * 0.85).toLocaleString(),
                     percent: 85,
-                    color: "bg-orange-500",
+                    color: "bg-cyan-500",
                   },
                   {
-                    asset: "ARB Token",
+                    asset: "ALEO Credits",
                     amount: (displayBalance * 0.1).toLocaleString(),
                     percent: 10,
-                    color: "bg-cyan-400",
+                    color: "bg-purple-400",
                   },
-                  { asset: "ETH Gas", amount: (displayBalance * 0.05).toLocaleString(), percent: 5, color: "bg-white" },
+                  { asset: "ZK Gas", amount: (displayBalance * 0.05).toLocaleString(), percent: 5, color: "bg-white" },
                 ].map((item, i) => (
                   <div key={i} className="space-y-2">
                     <div className="flex justify-between text-[10px] font-black uppercase tracking-widest">
@@ -105,18 +105,18 @@ export default function WalletOverview() {
         </Card>
 
         <div className="space-y-6">
-          <Card className="bg-orange-500 text-black rounded-none">
+          <Card className="bg-cyan-500 text-black rounded-none">
             <CardHeader className="pb-2">
               <CardTitle className="text-[10px] font-black uppercase tracking-widest text-black/70">
-                Vault Status
+                Vault Privacy Level
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-3">
                 <ShieldCheck className="w-8 h-8" />
                 <div>
-                  <p className="text-lg font-black leading-tight uppercase">Secured</p>
-                  <p className="text-[9px] font-bold uppercase tracking-tight">Multi-Sig 3/5 Active</p>
+                  <p className="text-lg font-black leading-tight uppercase">Maximum</p>
+                  <p className="text-[9px] font-bold uppercase tracking-tight">Zero-Knowledge Proofs Active</p>
                 </div>
               </div>
             </CardContent>
