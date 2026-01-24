@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Added custom cyberpunk scrollbar and progress animations */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 0px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #f97316;
+  }
+
+  @keyframes progress-indefinite {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-progress-indefinite {
+    animation: progress-indefinite 2s linear infinite;
+  }
+
+  .cursor-blink {
+    border-right: 2px solid white;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: white;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 100%; /* Kept from existing */
+    --popover-foreground: 0 0% 3.9%; /* Kept from existing */
+    --primary: 25 100% 50%; /* Jetr Orange */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.1%; /* Kept from existing */
+    --secondary-foreground: 0 0% 9%; /* Kept from existing */
+    --muted: 0 0% 96.1%; /* Kept from existing */
+    --muted-foreground: 0 0% 45.1%; /* Kept from existing */
+    --accent: 180 100% 50%; /* Cyan accent */
+    --accent-foreground: 240 10% 3.9%;
+    --destructive: 0 84.2% 60.2%; /* Kept from existing */
+    --destructive-foreground: 0 0% 98%; /* Kept from existing */
+    --border: 240 5% 15%;
+    --input: 0 0% 89.8%; /* Kept from existing */
+    --ring: 0 0% 3.9%; /* Kept from existing */
+    --chart-1: 12 76% 61%; /* Kept from existing */
+    --chart-2: 173 58% 39%; /* Kept from existing */
+    --chart-3: 197 37% 24%; /* Kept from existing */
+    --chart-4: 43 74% 66%; /* Kept from existing */
+    --chart-5: 27 87% 67%; /* Kept from existing */
+    --radius: 0px; /* Sharp cyberpunk corners */
+    --sidebar-background: 0 0% 98%; /* Kept from existing */
+    --sidebar-foreground: 240 5.3% 26.1%; /* Kept from existing */
+    --sidebar-primary: 240 5.9% 10%; /* Kept from existing */
+    --sidebar-primary-foreground: 0 0% 98%; /* Kept from existing */
+    --sidebar-accent: 240 4.8% 95.9%; /* Kept from existing */
+    --sidebar-accent-foreground: 240 5.9% 10%; /* Kept from existing */
+    --sidebar-border: 220 13% 91%; /* Kept from existing */
+    --sidebar-ring: 217.2 91.2% 59.8%; /* Kept from existing */
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

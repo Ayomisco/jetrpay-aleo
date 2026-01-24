@@ -1,0 +1,23 @@
+"use client"
+
+import { useApp } from "@/lib/app-context"
+import WalletOverview from "@/components/dashboard/wallet-overview"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+
+export default function WalletPage() {
+  const { isLoggedIn } = useApp()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/")
+    }
+  }, [isLoggedIn, router])
+
+  if (!isLoggedIn) {
+    return null
+  }
+
+  return <WalletOverview />
+}
