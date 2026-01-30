@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Activity, Zap, ShieldAlert, Cpu, RefreshCw } from "lucide-react"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { Button } from "@/components/ui/button"
 
 export default function OperationsCenter() {

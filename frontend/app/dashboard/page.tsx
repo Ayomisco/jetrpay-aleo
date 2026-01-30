@@ -1,6 +1,6 @@
 "use client"
 
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import EmployeeDashboard from "@/components/dashboard/employee-dashboard"
 import AdminDashboard from "@/components/dashboard/admin-dashboard"
 import { useRouter } from "next/navigation"

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Zap, Wallet, TrendingUp, Shield, Users, Globe } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { useEffect } from "react"
 
 export default function LandingPage() {
@@ -62,9 +62,9 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black italic tracking-tighter leading-tight text-balance">
-            Real-Time Payroll{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600">
-              on Arbitrum
+            Private Payroll{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-500">
+              on Aleo
             </span>
           </h1>
 
@@ -111,7 +111,7 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Zap, label: "Per-Second Streams", desc: "Real-time salary disbursement on Arbitrum" },
+              { icon: Zap, label: "Per-Second Streams", desc: "Private real-time salary on Aleo with ZK proofs" },
               { icon: Wallet, label: "Earned Wage Access", desc: "Instant access to accrued wages anytime" },
               { icon: TrendingUp, label: "Analytics Dashboard", desc: "Real-time payroll metrics and burn rates" },
               { icon: Shield, label: "Multi-Sig Vaults", desc: "Enterprise-grade security for treasuries" },

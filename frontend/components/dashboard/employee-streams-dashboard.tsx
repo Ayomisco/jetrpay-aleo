@@ -1,7 +1,7 @@
 "use client"
 import { Zap, TrendingUp, DollarSign } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 
 export default function EmployeeStreamsDashboard() {
   const { accruedBalance, streamingRate, transactions } = useApp()

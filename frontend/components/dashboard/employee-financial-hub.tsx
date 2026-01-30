@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import {
   Dialog,
   DialogContent,
@@ -14,24 +14,30 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { PiggyBank, Zap, Clock, CheckCircle } from "lucide-react"
+import { PiggyBank, Zap, Clock, CheckCircle, Shield, Loader2 } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { formatAddress } from "@/lib/aleo"
 
 export default function EmployeeFinancialHub() {
-  const { accruedBalance, addNotification, addTransaction } = useApp()
+  const { 
+    accruedBalance, 
+    addNotification, 
+    addTransaction, 
+    claimSalary, 
+    isTransacting,
+    networkStatus,
+    currentBlockHeight,
+    walletAddress
+  } = useApp()
   const [ewaAmount, setEwaAmount] = useState("")
   const [savingsGoal, setSavingsGoal] = useState("")
   const [billPayee, setBillPayee] = useState("")
   const [billAmount, setBillAmount] = useState("")
 
-  const handleEWARequest = () => {
+  const handleEWARequest = async () => {
     const amount = Number.parseFloat(ewaAmount)
     if (!isNaN(amount) && amount > 0 && amount <= accruedBalance) {
-      addTransaction({ type: "payment", amount, asset: "USDC" })
-      addNotification({
-        title: "Earned Wage Access Requested",
-        message: `$${amount.toFixed(2)} EWA request processed instantly.`,
-        type: "success",
-      })
+      await claimSalary(amount)
       setEwaAmount("")
     }
   }
@@ -41,7 +47,7 @@ export default function EmployeeFinancialHub() {
     if (!isNaN(amount) && amount > 0) {
       addNotification({
         title: "Savings Goal Created",
-        message: `Goal for $${amount.toFixed(2)} set. Auto-transfer enabled.`,
+        message: `Goal for $${amount.toFixed(2)} set. Auto-transfer enabled via ZK protocol.`,
         type: "success",
       })
       setSavingsGoal("")
@@ -54,7 +60,7 @@ export default function EmployeeFinancialHub() {
       addTransaction({ type: "payment", amount, asset: "USDC" })
       addNotification({
         title: "Bill Payment Scheduled",
-        message: `$${amount.toFixed(2)} payment to ${billPayee} queued for processing.`,
+        message: `$${amount.toFixed(2)} payment to ${billPayee} queued for ZK processing.`,
         type: "success",
       })
       setBillPayee("")
@@ -64,12 +70,22 @@ export default function EmployeeFinancialHub() {
 
   return (
     <div className="space-y-6">
+      {/* Network Status */}
+      <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest text-neutral-500 px-1">
+        <span className="flex items-center gap-2">
+          <div className={cn("w-2 h-2 rounded-full", networkStatus === "connected" ? "bg-cyan-500" : "bg-red-500")} />
+          {networkStatus === "connected" ? "ALEO_TESTNET" : "DISCONNECTED"}
+        </span>
+        <span>Block: {currentBlockHeight.toLocaleString()}</span>
+        {walletAddress && <span>Wallet: {formatAddress(walletAddress)}</span>}
+      </div>
+
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">Financial Hub</h2>
+        <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">Private Financial Hub</h2>
         <div className="flex gap-2">
           <div className="text-right">
             <p className="text-[10px] font-bold text-neutral-500 uppercase">Available Private Balance</p>
-            <p className="text-lg font-black text-purple-400">${accruedBalance.toFixed(2)}</p>
+            <p className="text-lg font-black text-cyan-400">${accruedBalance.toFixed(2)}</p>
           </div>
         </div>
       </div>
@@ -81,19 +97,19 @@ export default function EmployeeFinancialHub() {
           <CardHeader>
             <div className="flex items-center gap-3">
               <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-none">
-                <Zap className="w-5 h-5 text-cyan-500" />
+                <Shield className="w-5 h-5 text-cyan-500" />
               </div>
               <CardTitle className="text-xs font-black uppercase tracking-widest text-white">
-                Private Wage Access
+                ZK Wage Access
               </CardTitle>
             </div>
             <CardDescription className="text-[9px] text-neutral-500 font-bold uppercase">
-              Access earned wages privately
+              Access earned wages via ZK proof
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="p-3 bg-black border border-neutral-800 rounded-none space-y-2">
-              <p className="text-[10px] font-bold text-neutral-500 uppercase">Max Available Today</p>
+              <p className="text-[10px] font-bold text-neutral-500 uppercase">Max Available (ZK-Verified)</p>
               <p className="text-lg font-black text-cyan-500">${accruedBalance.toFixed(2)}</p>
             </div>
             <Dialog>
@@ -133,10 +149,14 @@ export default function EmployeeFinancialHub() {
                 <DialogFooter>
                   <Button
                     onClick={handleEWARequest}
-                    disabled={!ewaAmount || Number.parseFloat(ewaAmount) > accruedBalance}
-                    className="w-full bg-orange-500 text-black hover:bg-orange-600 font-black uppercase text-xs tracking-widest rounded-none h-12"
+                    disabled={!ewaAmount || Number.parseFloat(ewaAmount) > accruedBalance || isTransacting}
+                    className="w-full bg-cyan-500 text-black hover:bg-cyan-600 font-black uppercase text-xs tracking-widest rounded-none h-12"
                   >
-                    Get Access Now
+                    {isTransacting ? (
+                      <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Generating ZK Proof...</>
+                    ) : (
+                      "Execute ZK Withdrawal"
+                    )}
                   </Button>
                 </DialogFooter>
               </DialogContent>

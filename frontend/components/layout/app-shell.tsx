@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react"
 import { Wallet, Settings, Bell, Zap, LayoutDashboard, History, X, Menu, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -51,7 +51,17 @@ export default function AppShell({ children }: AppShellProps) {
       {mobileMenuOpen && (
         <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] md:hidden animate-in fade-in flex flex-col p-8">
           <div className="flex justify-between items-center mb-16">
-            <h1 className="text-xl font-black italic text-white uppercase tracking-tighter">JETRPAY</h1>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white text-black flex items-center justify-center font-black italic">
+                J
+              </div>
+              <div>
+                <h1 className="text-xl font-black italic text-white uppercase tracking-tighter">JETRPAY</h1>
+                <div className="px-2 py-0.5 bg-cyan-400/10 border border-cyan-400/30 inline-block">
+                  <span className="text-cyan-400 font-black text-[7px] uppercase tracking-widest">on Aleo</span>
+                </div>
+              </div>
+            </div>
             <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
               <X className="w-6 h-6" />
             </Button>
@@ -88,7 +98,12 @@ export default function AppShell({ children }: AppShellProps) {
             <div className="w-10 h-10 bg-white text-black flex items-center justify-center font-black italic transition-transform group-hover:rotate-12">
               J
             </div>
-            <h1 className="text-xl font-black tracking-tighter italic text-white uppercase">JETRPAY</h1>
+            <div>
+              <h1 className="text-xl font-black tracking-tighter italic text-white uppercase">JETRPAY</h1>
+              <div className="px-2 py-0.5 bg-cyan-400/10 border border-cyan-400/30 inline-block">
+                <span className="text-cyan-400 font-black text-[7px] uppercase tracking-widest">on Aleo</span>
+              </div>
+            </div>
           </Link>
           <nav className="space-y-2">
             {navItems.map((item) => (
@@ -139,11 +154,11 @@ export default function AppShell({ children }: AppShellProps) {
               <Menu className="w-6 h-6" />
             </Button>
             <div className="hidden lg:flex items-center gap-4 text-[9px] font-black text-neutral-600 tracking-widest">
-              <span className="text-orange-500 flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" /> ARBITRUM_ONE
+              <span className="text-cyan-500 flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" /> ALEO_TESTNET
               </span>
               <div className="w-px h-3 bg-white/10" />
-              <span>v5.2.0_STABLE</span>
+              <span>v0.1.0_BETA</span>
             </div>
           </div>
 
@@ -199,10 +214,12 @@ export default function AppShell({ children }: AppShellProps) {
               onClick={() => connectWallet()}
               className={cn(
                 "h-10 px-6 font-black text-[10px] tracking-widest uppercase transition-all",
-                walletAddress ? "bg-white text-black" : "bg-transparent border border-white/20 hover:bg-white/5",
+                walletAddress ? "bg-cyan-500 text-black hover:bg-cyan-400" : "bg-transparent border border-white/20 hover:bg-white/5",
               )}
             >
-              {walletAddress ? walletAddress : "CONNECT_WALLET"}
+              {walletAddress 
+                ? walletAddress.slice(0, 6) + "..." + walletAddress.slice(-4) 
+                : "CONNECT_WALLET"}
             </Button>
           </div>
         </header>

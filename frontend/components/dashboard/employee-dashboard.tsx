@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { Zap, ArrowDownCircle, History, ArrowUpRight, Globe, Info, CreditCard } from "lucide-react"
+import { Zap, ArrowDownCircle, History, ArrowUpRight, Globe, Info, CreditCard, Loader2, Shield } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import {
   Dialog,
   DialogContent,
@@ -16,26 +16,52 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { formatAddress } from "@/lib/aleo"
 
 export default function EmployeeDashboard() {
-  const { accruedBalance, streamingRate, transactions, withdrawFunds, requestAdvance } = useApp()
+  const { 
+    accruedBalance, 
+    streamingRate, 
+    transactions, 
+    withdrawFunds, 
+    requestAdvance,
+    claimSalary,
+    isTransacting,
+    walletAddress,
+    currentBlockHeight,
+    networkStatus
+  } = useApp()
   const [withdrawAmount, setWithdrawAmount] = useState("")
   const [advanceAmount, setAdvanceAmount] = useState("")
   const [sendAmount, setSendAmount] = useState("")
   const [sendAddress, setSendAddress] = useState("")
+  const [claimAmount, setClaimAmount] = useState("")
+  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false)
+  const [isClaimOpen, setIsClaimOpen] = useState(false)
 
-  const handleWithdraw = () => {
+  const handleWithdraw = async () => {
     const amount = Number.parseFloat(withdrawAmount)
     if (!isNaN(amount) && amount > 0) {
-      withdrawFunds(amount, "PERSONAL_WALLET_0x...F2")
+      await withdrawFunds(amount, sendAddress || "aleo1...private_wallet")
       setWithdrawAmount("")
+      setSendAddress("")
+      setIsWithdrawOpen(false)
     }
   }
 
-  const handleSend = () => {
+  const handleClaim = async () => {
+    const amount = Number.parseFloat(claimAmount)
+    if (!isNaN(amount) && amount > 0) {
+      await claimSalary(amount)
+      setClaimAmount("")
+      setIsClaimOpen(false)
+    }
+  }
+
+  const handleSend = async () => {
     const amount = Number.parseFloat(sendAmount)
     if (!isNaN(amount) && amount > 0 && sendAddress) {
-      withdrawFunds(amount, sendAddress)
+      await withdrawFunds(amount, sendAddress)
       setSendAmount("")
       setSendAddress("")
     }
@@ -51,6 +77,16 @@ export default function EmployeeDashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Network Status Bar */}
+      <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest text-neutral-500 px-1">
+        <span className="flex items-center gap-2">
+          <div className={cn("w-2 h-2 rounded-full", networkStatus === "connected" ? "bg-cyan-500" : "bg-red-500")} />
+          {networkStatus === "connected" ? "ALEO_TESTNET" : "DISCONNECTED"}
+        </span>
+        <span>Block: {currentBlockHeight.toLocaleString()}</span>
+        {walletAddress && <span>Wallet: {formatAddress(walletAddress)}</span>}
+      </div>
+
       {/* Hero Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card className="bg-cyan-400/5 border-cyan-400/30 rounded-none relative overflow-hidden group">
@@ -70,51 +106,55 @@ export default function EmployeeDashboard() {
               <span className="text-xs font-bold text-cyan-400/70 uppercase">USDC</span>
             </div>
             <p className="text-[10px] text-neutral-500 mt-2 font-bold uppercase tracking-tight">
-              Identity Hidden • Amount Encrypted
+              Identity Hidden • Amount Encrypted on Aleo
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-2">
-              <Dialog>
+              <Dialog open={isClaimOpen} onOpenChange={setIsClaimOpen}>
                 <DialogTrigger asChild>
                   <Button className="flex-1 bg-cyan-400 hover:bg-cyan-500 text-black font-black uppercase text-[10px] tracking-widest rounded-none h-11">
-                    <ArrowDownCircle className="w-3 h-3 mr-2" /> Anonymous Withdrawal
+                    <Shield className="w-3 h-3 mr-2" /> Claim via ZK Proof
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="bg-[#0c0c0c] border-neutral-800 text-white font-mono rounded-none sm:max-w-md">
                   <DialogHeader>
                     <DialogTitle className="text-cyan-400 uppercase tracking-widest italic font-black">
-                      PRIVATE WITHDRAWAL (ZK-PROOF)
+                      ZK SALARY CLAIM
                     </DialogTitle>
                     <DialogDescription className="text-neutral-500 text-[10px] uppercase font-bold tracking-widest">
-                      Withdraw to unlinkable wallet • Identity protected
+                      Generate zero-knowledge proof to claim salary anonymously
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-6 py-4">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">
-                        Amount (USDC)
+                        Amount to Claim (USDC)
                       </label>
                       <Input
                         type="number"
-                        value={withdrawAmount}
-                        onChange={(e) => setWithdrawAmount(e.target.value)}
+                        value={claimAmount}
+                        onChange={(e) => setClaimAmount(e.target.value)}
                         placeholder="0.00"
                         className="bg-black border-neutral-800 text-white rounded-none h-14 font-black text-xl"
                       />
+                      <p className="text-[9px] text-neutral-600 uppercase">Available: ${accruedBalance.toFixed(2)}</p>
                     </div>
-                    <div className="p-4 bg-orange-500/5 border border-orange-500/20">
-                      <p className="text-[9px] text-orange-500 font-bold uppercase leading-relaxed">
-                        Notice: Withdrawals are processed instantly on Arbitrum. Network fees (gas) will be deducted
-                        from your protocol balance.
+                    <div className="p-4 bg-cyan-500/5 border border-cyan-500/20">
+                      <p className="text-[9px] text-cyan-400 font-bold uppercase leading-relaxed">
+                        Your claim will be verified via ZK proof on Aleo. No one can link this withdrawal to your identity.
                       </p>
                     </div>
                   </div>
                   <DialogFooter className="sm:justify-start">
                     <Button
-                      onClick={handleWithdraw}
-                      disabled={!withdrawAmount || Number.parseFloat(withdrawAmount) > accruedBalance}
-                      className="w-full bg-orange-500 text-black hover:bg-orange-600 font-black uppercase text-xs tracking-widest rounded-none h-14"
+                      onClick={handleClaim}
+                      disabled={!claimAmount || Number.parseFloat(claimAmount) > accruedBalance || isTransacting}
+                      className="w-full bg-cyan-500 text-black hover:bg-cyan-600 font-black uppercase text-xs tracking-widest rounded-none h-14"
                     >
-                      EXECUTE WITHDRAWAL
+                      {isTransacting ? (
+                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> GENERATING ZK PROOF...</>
+                      ) : (
+                        "EXECUTE ZK CLAIM"
+                      )}
                     </Button>
                   </DialogFooter>
                 </DialogContent>
@@ -123,7 +163,7 @@ export default function EmployeeDashboard() {
           </CardContent>
         </Card>
 
-        {/* ... existing rates card ... */}
+        {/* Streaming Rate Card */}
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
@@ -344,7 +384,7 @@ export default function EmployeeDashboard() {
                     <Input
                       value={sendAddress}
                       onChange={(e) => setSendAddress(e.target.value)}
-                      placeholder="0x..."
+                      placeholder="aleo1..."
                       className="bg-black border-neutral-800 text-white rounded-none h-12"
                     />
                   </div>

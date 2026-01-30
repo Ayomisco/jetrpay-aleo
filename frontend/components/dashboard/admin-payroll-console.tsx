@@ -16,11 +16,13 @@ import {
   Upload,
   Download,
   SettingsIcon,
+  Loader2,
+  Shield,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import {
   Dialog,
@@ -31,10 +33,23 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
+import { formatAddress } from "@/lib/aleo"
 
 export default function AdminPayrollConsole() {
-  const { employees, companyStats, updateEmployeeStatus, addEmployee, removeEmployee, addNotification, depositFunds } =
-    useApp()
+  const { 
+    employees, 
+    companyStats, 
+    updateEmployeeStatus, 
+    addEmployee, 
+    removeEmployee, 
+    addNotification, 
+    depositFunds,
+    createEmployeeStream,
+    isTransacting,
+    walletAddress,
+    currentBlockHeight,
+    networkStatus
+  } = useApp()
   const [searchTerm, setSearchTerm] = useState("")
   const [isAddingEmployee, setIsAddingEmployee] = useState(false)
   const [isBulkImporting, setIsBulkImporting] = useState(false)
@@ -55,18 +70,42 @@ export default function AdminPayrollConsole() {
     wallet: "",
   })
 
-  const handleAddEmployee = () => {
-    if (newEmployee.name && newEmployee.role && newEmployee.salary) {
-      addEmployee({
-        id: `emp-${Date.now()}`,
+  const handleAddEmployee = async () => {
+    if (newEmployee.name && newEmployee.role && newEmployee.salary && newEmployee.wallet) {
+      const salary = Number.parseFloat(newEmployee.salary)
+      const ratePerBlock = Math.floor(salary / 31536000 * 12) // ~12 blocks per second average
+      
+      // Create on-chain stream first
+      await createEmployeeStream(
+        newEmployee.wallet,
+        ratePerBlock,
+        salary // max amount = annual salary
+      )
+      
+      // Add employee to local state
+      await addEmployee({
         name: newEmployee.name,
         role: newEmployee.role,
         status: "Active",
-        salary: Number.parseFloat(newEmployee.salary),
-        ratePerSecond: Number.parseFloat(newEmployee.salary) / 31536000,
-        accruedBalance: 0,
-        walletAddress: newEmployee.wallet || "0x" + Math.random().toString(16).slice(2, 10),
-        startDate: new Date().toISOString().split("T")[0],
+        salary: salary,
+        ratePerSecond: salary / 31536000,
+        ratePerBlock: ratePerBlock,
+        walletAddress: newEmployee.wallet,
+      })
+      
+      setNewEmployee({ name: "", role: "", salary: "", wallet: "" })
+      setIsAddingEmployee(false)
+    } else if (newEmployee.name && newEmployee.role && newEmployee.salary) {
+      // Add without on-chain stream (demo mode)
+      const salary = Number.parseFloat(newEmployee.salary)
+      await addEmployee({
+        name: newEmployee.name,
+        role: newEmployee.role,
+        status: "Active",
+        salary: salary,
+        ratePerSecond: salary / 31536000,
+        ratePerBlock: Math.floor(salary / 31536000 * 12),
+        walletAddress: newEmployee.wallet || "aleo1" + Math.random().toString(36).slice(2, 10) + "...",
       })
       setNewEmployee({ name: "", role: "", salary: "", wallet: "" })
       setIsAddingEmployee(false)
@@ -401,9 +440,14 @@ export default function AdminPayrollConsole() {
                 <DialogFooter>
                   <Button
                     onClick={handleAddEmployee}
+                    disabled={isTransacting || !newEmployee.name || !newEmployee.role || !newEmployee.salary}
                     className="w-full bg-cyan-500 text-black hover:bg-cyan-600 font-black uppercase text-xs tracking-widest h-14"
                   >
-                    AUTHORIZE ZK STREAM DEPLOYMENT
+                    {isTransacting ? (
+                      <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> DEPLOYING ZK STREAM...</>
+                    ) : (
+                      "AUTHORIZE ZK STREAM DEPLOYMENT"
+                    )}
                   </Button>
                 </DialogFooter>
               </DialogContent>

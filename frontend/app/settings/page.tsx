@@ -1,6 +1,6 @@
 "use client"
 
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import SystemSettings from "@/components/dashboard/system-settings"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"

@@ -2,12 +2,27 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Shield, Network, Lock, Users, Fingerprint, Eye, EyeOff } from "lucide-react"
-import { useApp } from "@/lib/app-context"
+import { Shield, Network, Lock, Users, Fingerprint, Eye, EyeOff, RefreshCw, Loader2 } from "lucide-react"
+import { useApp } from "@/lib/app-context-v2"
 import { useState } from "react"
+import { cn } from "@/lib/utils"
+import { formatAddress } from "@/lib/aleo"
 
 export default function SystemSettings() {
-  const { multiFactorEnabled, toggleMultiFactor, privateModeEnabled, togglePrivateMode, addNotification, userRole } =
+  const { 
+    multiFactorEnabled, 
+    toggleMultiFactor, 
+    privateModeEnabled, 
+    togglePrivateMode, 
+    addNotification, 
+    userRole,
+    walletAddress,
+    currentBlockHeight,
+    networkStatus,
+    refreshData,
+    isLoading,
+    disconnectWallet
+  } =
     useApp()
   const [signingThreshold, setSigningThreshold] = useState(3)
 
@@ -15,16 +30,52 @@ export default function SystemSettings() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">System Configuration</h2>
+      {/* Network Status */}
+      <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest text-neutral-500 px-1">
+        <span className="flex items-center gap-2">
+          <div className={cn("w-2 h-2 rounded-full", networkStatus === "connected" ? "bg-cyan-500" : "bg-red-500")} />
+          {networkStatus === "connected" ? "ALEO_TESTNET" : "DISCONNECTED"}
+        </span>
+        <span>Block: {currentBlockHeight.toLocaleString()}</span>
+        {walletAddress && <span>Wallet: {formatAddress(walletAddress)}</span>}
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={refreshData}
+          disabled={isLoading}
+          className="text-[9px] text-cyan-400 hover:text-cyan-300 h-6"
+        >
+          {isLoading ? <Loader2 className="w-3 h-3 animate-spin" /> : <RefreshCw className="w-3 h-3 mr-1" />}
+          Sync
+        </Button>
+      </div>
+
+      <h2 className="text-xl font-black italic tracking-tighter text-white uppercase">Aleo Protocol Settings</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Security Controls */}
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none">
           <CardHeader className="flex flex-row items-center gap-3 border-b border-neutral-900">
             <Shield className="w-5 h-5 text-cyan-500" />
-            <CardTitle className="text-xs font-black uppercase tracking-widest text-white">Security & Auth</CardTitle>
+            <CardTitle className="text-xs font-black uppercase tracking-widest text-white">ZK Security & Auth</CardTitle>
           </CardHeader>
           <CardContent className="p-6 space-y-4">
+            {/* Wallet Info */}
+            {walletAddress && (
+              <div className="p-3 bg-black border border-cyan-500/30 space-y-2">
+                <p className="text-[9px] font-bold text-cyan-400 uppercase">Connected Aleo Wallet</p>
+                <p className="text-xs font-mono text-white break-all">{walletAddress}</p>
+                <Button
+                  onClick={disconnectWallet}
+                  variant="outline"
+                  size="sm"
+                  className="mt-2 text-[9px] font-bold uppercase tracking-widest border-red-500/30 text-red-400 hover:bg-red-500/10"
+                >
+                  Disconnect Wallet
+                </Button>
+              </div>
+            )}
+
             <button
               onClick={toggleMultiFactor}
               className="w-full flex items-center justify-between p-3 bg-black border border-neutral-800 hover:bg-white/5 transition-colors group"
@@ -70,7 +121,7 @@ export default function SystemSettings() {
                 onClick={() =>
                   addNotification({
                     title: "Rotating View Keys",
-                    message: "Generating new session view keys...",
+                    message: "Generating new Aleo session view keys...",
                     type: "warning",
                   })
                 }
@@ -88,7 +139,7 @@ export default function SystemSettings() {
             <CardHeader className="flex flex-row items-center gap-3 border-b border-neutral-900">
               <Users className="w-5 h-5 text-purple-500" />
               <CardTitle className="text-xs font-black uppercase tracking-widest text-white">
-                Multi-Sig Governance
+                Multi-Sig Governance (Aleo)
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6 space-y-6">
@@ -140,7 +191,7 @@ export default function SystemSettings() {
               <div className="p-4 bg-black border border-neutral-800">
                 <p className="text-[9px] font-black text-neutral-500 uppercase tracking-widest mb-2">Connected Node</p>
                 <p className="text-xs font-bold text-white uppercase tracking-tight">
-                  arbitrum-mainnet.alchemyapi.io/v2/...
+                  api.explorer.aleo.org/v1/testnet...
                 </p>
               </div>
               <div className="flex gap-3">

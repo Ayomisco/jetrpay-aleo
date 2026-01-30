@@ -1,6 +1,6 @@
 "use client"
 
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import OperationsCenter from "@/components/dashboard/operations-center"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"

@@ -1,6 +1,6 @@
 "use client"
 
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { TrendingUp, Calendar, ArrowDownRight, Download } from "lucide-react"

@@ -12,11 +12,14 @@ import {
   Power,
   PowerOff,
   DollarSign,
+  Shield,
+  Loader2,
+  RefreshCw,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import {
   Dialog,
@@ -28,9 +31,24 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
+import { formatAddress } from "@/lib/aleo"
 
 export default function AdminDashboard() {
-  const { employees, companyStats, updateEmployeeStatus, addEmployee, removeEmployee, addNotification } = useApp()
+  const { 
+    employees, 
+    companyStats, 
+    updateEmployeeStatus, 
+    addEmployee, 
+    removeEmployee, 
+    addNotification,
+    createEmployeeStream,
+    isTransacting,
+    walletAddress,
+    currentBlockHeight,
+    networkStatus,
+    refreshData,
+    isLoading
+  } = useApp()
   const [searchTerm, setSearchTerm] = useState("")
   const [isAddingEmployee, setIsAddingEmployee] = useState(false)
 
@@ -47,8 +65,37 @@ export default function AdminDashboard() {
     wallet: "",
   })
 
-  const handleAddEmployee = () => {
-    if (newEmployee.name && newEmployee.role && newEmployee.salary) {
+  const handleAddEmployee = async () => {
+    if (newEmployee.name && newEmployee.role && newEmployee.salary && newEmployee.wallet) {
+      // Create on-chain stream
+      const streamCreated = await createEmployeeStream(
+        newEmployee.wallet,
+        Number.parseFloat(newEmployee.salary)
+      )
+      
+      if (streamCreated) {
+        addEmployee({
+          id: `emp-${Date.now()}`,
+          name: newEmployee.name,
+          role: newEmployee.role,
+          status: "Active",
+          salary: Number.parseFloat(newEmployee.salary),
+          ratePerSecond: Number.parseFloat(newEmployee.salary) / 31536000,
+          accruedBalance: 0,
+          walletAddress: newEmployee.wallet,
+          startDate: new Date().toISOString().split("T")[0],
+        })
+        setNewEmployee({ name: "", role: "", salary: "", wallet: "" })
+        setIsAddingEmployee(false)
+        
+        addNotification({
+          title: "ZK Stream Created",
+          message: `Private salary stream created for ${newEmployee.name} on Aleo`,
+          type: "success",
+        })
+      }
+    } else if (newEmployee.name && newEmployee.role && newEmployee.salary) {
+      // Demo mode - no on-chain
       addEmployee({
         id: `emp-${Date.now()}`,
         name: newEmployee.name,
@@ -57,7 +104,7 @@ export default function AdminDashboard() {
         salary: Number.parseFloat(newEmployee.salary),
         ratePerSecond: Number.parseFloat(newEmployee.salary) / 31536000,
         accruedBalance: 0,
-        walletAddress: newEmployee.wallet || "0x" + Math.random().toString(16).slice(2, 10),
+        walletAddress: newEmployee.wallet || "aleo1" + Math.random().toString(36).slice(2, 10) + "...",
         startDate: new Date().toISOString().split("T")[0],
       })
       setNewEmployee({ name: "", role: "", salary: "", wallet: "" })
@@ -75,6 +122,26 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Network Status Bar */}
+      <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest text-neutral-500 px-1">
+        <span className="flex items-center gap-2">
+          <div className={cn("w-2 h-2 rounded-full", networkStatus === "connected" ? "bg-cyan-500" : "bg-red-500")} />
+          {networkStatus === "connected" ? "ALEO_TESTNET" : "DISCONNECTED"}
+        </span>
+        <span>Block: {currentBlockHeight.toLocaleString()}</span>
+        {walletAddress && <span>Admin: {formatAddress(walletAddress)}</span>}
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={refreshData}
+          disabled={isLoading}
+          className="text-[9px] text-cyan-400 hover:text-cyan-300 h-6"
+        >
+          {isLoading ? <Loader2 className="w-3 h-3 animate-spin" /> : <RefreshCw className="w-3 h-3 mr-1" />}
+          Sync
+        </Button>
+      </div>
+
       {/* Company Stats Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="bg-[#0f0f0f] border-neutral-800 rounded-none relative overflow-hidden group">
@@ -222,12 +289,12 @@ export default function AdminDashboard() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">
-                        Arbitrum Wallet Address
+                        Aleo Wallet Address
                       </label>
                       <Input
                         value={newEmployee.wallet}
                         onChange={(e) => setNewEmployee({ ...newEmployee, wallet: e.target.value })}
-                        placeholder="0x..."
+                        placeholder="aleo1..."
                         className="bg-black border-neutral-800 text-white rounded-none h-12 font-mono"
                       />
                     </div>

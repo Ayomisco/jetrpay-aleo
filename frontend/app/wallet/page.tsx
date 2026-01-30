@@ -1,6 +1,6 @@
 "use client"
 
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import WalletOverview from "@/components/dashboard/wallet-overview"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"

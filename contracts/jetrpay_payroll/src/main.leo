@@ -38,14 +38,15 @@ program jetrpay_payroll_testnet_v1.aleo {
     transition create_stream(
         public employee: address,
         public rate: u64,
-        public max_amount: u64
+        public max_amount: u64,
+        public start_time: u32
     ) -> SalaryStream {
         return SalaryStream {
             owner: employee,
             issuer: self.caller,
             rate_per_block: rate,
-            start_block: block.height,
-            last_updated_block: block.height,
+            start_block: start_time,
+            last_updated_block: start_time,
             max_cap: max_amount,
             total_claimed: 0u64,
             unclaimed_balance: 0u64,
@@ -61,11 +62,11 @@ program jetrpay_payroll_testnet_v1.aleo {
     // - Return new Stream record and new Token record
     transition claim_salary(
         stream: SalaryStream,
-        amount_to_claim: u64
+        amount_to_claim: u64,
+        public current_height: u32
     ) -> (SalaryStream, Token) {
         // Calculate time delta
         // Ensure strictly monotonic time to prevent underflow if block height is weird (unlikely but safe)
-        let current_height: u32 = block.height;
         let delta_blocks: u32 = current_height - stream.last_updated_block;
         
         // Calculate value generated in this delta

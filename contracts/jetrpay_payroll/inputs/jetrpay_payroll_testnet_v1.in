@@ -6,3 +6,4 @@ amount: u64 = 1000u64;
 employee: address = aleo1...;
 rate: u64 = 10u64;
 max_amount: u64 = 100000u64;
+start_time: u32 = 0u32;

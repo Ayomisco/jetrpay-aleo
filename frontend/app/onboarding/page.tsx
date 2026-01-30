@@ -1,7 +1,7 @@
 "use client"
 
-import Onboarding from "@/components/auth/onboarding"
-import { useApp } from "@/lib/app-context"
+import Onboarding from "@/components/auth/onboarding-v2"
+import { useApp } from "@/lib/app-context-v2"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 

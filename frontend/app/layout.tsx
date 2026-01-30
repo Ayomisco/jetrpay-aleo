@@ -2,13 +2,13 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist_Mono as GeistMono } from "next/font/google"
 import "./globals.css"
-import { AppProvider } from "@/lib/app-context"
+import { AppProvider } from "@/lib/app-context-v2"
 
 const geistMono = GeistMono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "JetrPay | Real-Time Crypto Payroll",
-  description: "Get paid by the second. Decentralized payroll streaming infrastructure on Arbitrum.",
+  description: "Get paid by the second. Private payroll streaming infrastructure on Aleo with zero-knowledge proofs.",
     generator: 'v0.app'
 }
 

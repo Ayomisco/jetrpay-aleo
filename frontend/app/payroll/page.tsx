@@ -1,6 +1,6 @@
 "use client"
 
-import { useApp } from "@/lib/app-context"
+import { useApp } from "@/lib/app-context-v2"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import AdminPayrollConsole from "@/components/dashboard/admin-payroll-console"
