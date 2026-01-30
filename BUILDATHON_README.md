@@ -144,6 +144,7 @@ jetrpay-aleo/
 ## 🔧 Tech Stack
 
 ### Frontend
+
 - **Next.js 15** - React framework with App Router
 - **React 19** - UI library
 - **Tailwind CSS** - Styling
@@ -151,17 +152,20 @@ jetrpay-aleo/
 - **TypeScript** - Type safety
 
 ### Blockchain
+
 - **Aleo** - Privacy-focused Layer-1 blockchain
 - **Leo** - Aleo's native smart contract language
 - **@aleohq/sdk** - JavaScript SDK for Aleo
 
 ### Wallets Supported
+
 - **Leo Wallet** - Primary Aleo wallet
 - **Puzzle Wallet** - Alternative Aleo wallet
 
 ## 📱 Features
 
 ### For Employers (Admin Dashboard)
+
 - ✅ Register company with KYB verification
 - ✅ Add employees to payroll
 - ✅ Create private salary streams
@@ -170,6 +174,7 @@ jetrpay-aleo/
 - ✅ Bulk import employees via CSV
 
 ### For Employees
+
 - ✅ Connect wallet securely
 - ✅ View real-time accrued balance
 - ✅ Claim salary with ZK proof
@@ -177,6 +182,7 @@ jetrpay-aleo/
 - ✅ Request salary advances
 
 ### Network Integration
+
 - ✅ Real-time block height from Aleo testnet
 - ✅ Network status monitoring
 - ✅ Program deployment verification
@@ -184,7 +190,20 @@ jetrpay-aleo/
 
 ## 🔗 Smart Contract
 
-The Leo smart contract (`jetrpay_payroll_testnet_v1.aleo`) implements:
+### Contract Details
+
+| Property | Value |
+|----------|-------|
+| **Program ID** | `jetrpay_payroll_testnet_v1.aleo` |
+| **Network** | Aleo Testnet |
+| **Language** | Leo 3.4.0 |
+| **Statements** | 30 |
+
+> **Note**: The contract is compiled and ready for deployment. Deployment to testnet requires ALEO credits. You can deploy using:
+> ```bash
+> cd contracts/jetrpay_payroll
+> leo deploy --network testnet --endpoint "https://api.explorer.provable.com/v1" --broadcast
+> ```
 
 ### Transitions
 
@@ -211,13 +230,14 @@ transition resume_stream(stream: SalaryStream) -> SalaryStream
 
 ### Privacy Model
 
-| Data | Who Can See |
-|------|-------------|
-| Salary Amount | Only employer & employee |
-| Stream Rate | Only employer & employee |
-| Claimed Amount | Only employee |
-| Total Balance | Only employee |
-| Payment Links | Nobody (ZK hidden) |
+
+| Data           | Who Can See              |
+| -------------- | ------------------------ |
+| Salary Amount  | Only employer & employee |
+| Stream Rate    | Only employer & employee |
+| Claimed Amount | Only employee            |
+| Total Balance  | Only employee            |
+| Payment Links  | Nobody (ZK hidden)       |
 
 ## 🌐 Environment Variables
 

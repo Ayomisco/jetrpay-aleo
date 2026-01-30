@@ -10,12 +10,23 @@
 
 [![Aleo](https://img.shields.io/badge/Built_on-Aleo-00D4FF?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMiAyMkgyMkwxMiAyWiIgZmlsbD0iIzAwRDRGRiIvPgo8L3N2Zz4K)](https://aleo.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![Leo](https://img.shields.io/badge/Leo-ZK--Native-purple?style=flat-square)](https://developer.aleo.org/leo/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![Leo](https://img.shields.io/badge/Leo-3.4.0-purple?style=flat-square)](https://developer.aleo.org/leo/)
 
-[Demo](https://jetrpay-aleo.vercel.app) · [Documentation](./frontend/docs) · [Implementation Plan](./frontend/docs/ALEO_IMPLEMENTATION_PLAN.md)
+[Live Demo](https://jetrpay-aleo.vercel.app) · [Documentation](./frontend/docs) · [Smart Contract](#-smart-contract)
 
 </div>
+
+---
+
+## 📋 Contract Information
+
+| Property | Value |
+|----------|-------|
+| **Program ID** | `jetrpay_payroll_testnet_v1.aleo` |
+| **Network** | Aleo Testnet |
+| **API Endpoint** | `https://api.explorer.provable.com/v1` |
+| **Language** | Leo 3.4.0 |
 
 ---
 
