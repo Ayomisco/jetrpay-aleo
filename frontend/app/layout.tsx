@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${geistMono.className} bg-black text-white antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistMono.className} bg-black text-white antialiased`} suppressHydrationWarning>
         <AppProvider>
           <LayoutWrapper>{children}</LayoutWrapper>
         </AppProvider>

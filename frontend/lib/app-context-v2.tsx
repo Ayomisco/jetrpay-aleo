@@ -325,18 +325,24 @@ export function AppProvider({ children }: AppProviderProps) {
           setNetworkStatus("connected")
         }
         
-        // Check if program is deployed
-        const programRes = await fetch(`${ALEO_API_URL}/testnet/program/${PROGRAM_ID}`)
-        setProgramDeployed(programRes.ok)
+        // Check if program is deployed (silently - don't log 404s)
+        try {
+          const programRes = await fetch(`${ALEO_API_URL}/testnet/program/${PROGRAM_ID}`)
+          setProgramDeployed(programRes.ok)
+        } catch {
+          // Program not deployed yet - this is expected
+          setProgramDeployed(false)
+        }
         
       } catch (error) {
-        console.error('Network fetch error:', error)
+        // Silent fail for network issues in demo mode
         setNetworkStatus("disconnected")
       }
     }
 
     fetchNetworkData()
-    const interval = setInterval(fetchNetworkData, 30000)
+    // Poll every 60 seconds instead of 30 to reduce API calls
+    const interval = setInterval(fetchNetworkData, 60000)
     return () => clearInterval(interval)
   }, [])
 

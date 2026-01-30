@@ -149,8 +149,15 @@ export const leoWalletAdapter: WalletAdapter = {
       if (error.message?.includes('locked')) {
         throw new Error('Wallet is locked. Please unlock Leo Wallet first.');
       }
+      if (error.message?.includes('toString') || error.message?.includes('undefined')) {
+        // Known Leo Wallet internal bug - suggest demo mode
+        throw new Error('Leo Wallet has an internal error. Please try Demo Mode or update your wallet extension.');
+      }
+      if (error.message?.includes('unknown error')) {
+        throw new Error('Leo Wallet encountered an error. Try refreshing the page or use Demo Mode.');
+      }
       
-      throw new Error(error.message || 'Failed to connect. Please try again.');
+      throw new Error(error.message || 'Failed to connect. Please try again or use Demo Mode.');
     }
   },
   
