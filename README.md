@@ -13,7 +13,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
 [![Leo](https://img.shields.io/badge/Leo-3.4.0-purple?style=flat-square)](https://developer.aleo.org/leo/)
 
-[Live Demo](https://jetrpay-aleo.vercel.app) · [Documentation](./frontend/docs) · [Smart Contract](#-smart-contract)
+[Live Demo](https://jetrpay.xyz) · [Documentation](./frontend/docs) · [Smart Contract](#-smart-contract)
 
 </div>
 

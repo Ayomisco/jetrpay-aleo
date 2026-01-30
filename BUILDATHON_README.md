@@ -312,8 +312,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Built with ❤️ for the Aleo Hackathon 2026**
+**Built with ❤️ for the Aleo Buildathon 2026**
 
-[Website](https://jetrpay.io) · [Twitter](https://twitter.com/jetrpay) · [Discord](https://discord.gg/jetrpay)
+[Live Demo](https://jetrpay.xyz) · [GitHub](https://github.com/Ayomisco/jetrpay-aleo)
 
 </div>
